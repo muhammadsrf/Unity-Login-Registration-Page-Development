@@ -126,6 +126,9 @@ public class PlayfabManager : MonoBehaviour
     public void GetDataTeman()
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataReceived, OnError);
+
+        // Get Title Data - Nebengggg :D
+        GetTitleData();
     }
 
     private void OnDataReceived(GetUserDataResult result)
@@ -143,5 +146,24 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log("Successfull user data send!");
     }
 
+    // Title Data - Part 4
+    private void GetTitleData()
+    {
+        PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(), OnTitleDataReceived, OnError);
+    }
+
+    private void OnTitleDataReceived(GetTitleDataResult result)
+    {
+        if (result.Data == null || result.Data.ContainsKey("Message") == false || result.Data.ContainsKey("Msh") == false)
+        {
+            Debug.Log("No Data Received.");
+
+            return;
+        }
+
+        Debug.Log(result.Data["Message"]);
+        Debug.Log(result.Data["Msh"]);
+        Debug.Log("Successfull Title Data Received.");
+    }
 }
 
