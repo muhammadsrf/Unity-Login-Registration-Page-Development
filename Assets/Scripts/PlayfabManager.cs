@@ -7,12 +7,13 @@ using UnityEngine;
 
 public class PlayfabManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private SetNumber _setNumber;
     void Start()
     {
         Login();
     }
 
+    // Login - Part 1
     void Login()
     {
         var request = new LoginWithCustomIDRequest
@@ -44,8 +45,11 @@ public class PlayfabManager : MonoBehaviour
     private void OnSuccess(LoginResult result)
     {
         Debug.Log("Successfull login/account create!");
+
+        GetDataTeman();
     }
 
+    // Send Leaderboard - Part 2
     public void SendLeaderboard(int score)
     {
         var request = new UpdatePlayerStatisticsRequest
@@ -103,5 +107,41 @@ public class PlayfabManager : MonoBehaviour
             Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
         }
     }
+
+    // Send User Data - Part 3
+    public void SaveDataTeman(int budi, int ipin, int ibnu)
+    {
+        var request = new UpdateUserDataRequest
+        {
+            Data = new Dictionary<string, string> {
+                {"Budi", budi.ToString()},
+                {"Ipin", ipin.ToString()},
+                {"Ibnu", ibnu.ToString()}
+            }
+        };
+
+        PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+    }
+
+    public void GetDataTeman()
+    {
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataReceived, OnError);
+    }
+
+    private void OnDataReceived(GetUserDataResult result)
+    {
+        Debug.Log("Received user data.");
+
+        if (result.Data != null && result.Data.ContainsKey("Budi") && result.Data.ContainsKey("Ipin") && result.Data.ContainsKey("Ibnu"))
+        {
+            _setNumber.SyncToTeks(iteks1: result.Data["Budi"].Value, iteks2: result.Data["Ipin"].Value, iteks3: result.Data["Ibnu"].Value);
+        }
+    }
+
+    private void OnDataSend(UpdateUserDataResult result)
+    {
+        Debug.Log("Successfull user data send!");
+    }
+
 }
 
