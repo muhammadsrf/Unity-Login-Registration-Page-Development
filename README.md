@@ -11,10 +11,11 @@ A case study project on solving login or account registration issues in a game.
 
 
 ## 🚀 About Me
-🎮 : [sariepproduction](https://sariepproduction.itch.io)
+I am an experienced Unity game developer with advanced skills in C# programming, and I am the co-founder of *Planet Stars Game* studio.
 
+My expertise includes building and optimizing game engines, implementing game mechanics, and developing multiplayer games. I have a strong understanding of Unity's scripting API and how to use it to create engaging and immersive game experiences. I am always looking for new opportunities to collaborate and build exciting new projects, don't hesitate to reach out!
 
 ## Authors
 
 - [@muhammadsrf](https://www.github.com/muhammadsrf)
-
+- 🎮 : [sariepproduction](https://sariepproduction.itch.io)
